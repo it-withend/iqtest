@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IQ Тест — современный минимализм</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-orb orb-1" aria-hidden="true"></div>
+    <div class="bg-orb orb-2" aria-hidden="true"></div>
+
+    <main class="shell">
+      <form name="iq-results" netlify hidden>
+        <input type="text" name="run_id" />
+        <input type="text" name="completed_at" />
+        <input type="text" name="score" />
+        <input type="text" name="total" />
+        <input type="text" name="iq_estimate" />
+        <input type="text" name="band" />
+        <textarea name="answers"></textarea>
+      </form>
+      <header class="hero">
+        <div class="eyebrow">IQ ТЕСТ</div>
+        <h1>Минималистичный, но современный тест интеллекта</h1>
+        <p class="lead">
+          22 задания из разных областей мышления: логика, числа, язык, пространственные
+          образы и паттерны. Это не клинический IQ-диагноз, а аккуратная проверка
+          когнитивной формы по международной структуре тестов.
+        </p>
+        <div class="hero-meta">
+          <div class="meta-card">
+            <span class="meta-label">Время</span>
+            <span class="meta-value">25 минут</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-label">Заданий</span>
+            <span class="meta-value">22</span>
+          </div>
+          <div class="meta-card">
+            <span class="meta-label">Формат</span>
+            <span class="meta-value">Выбор ответа</span>
+          </div>
+        </div>
+        <button class="primary" id="startBtn">Начать тест</button>
+      </header>
+
+      <section class="card hidden" id="testCard" aria-live="polite">
+        <div class="test-head">
+          <div>
+            <div class="progress-label" id="progressLabel">Вопрос 1 из 20</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+          <div class="timer" id="timer">25:00</div>
+        </div>
+
+        <div class="question" id="questionText"></div>
+        <div class="options" id="options"></div>
+
+        <div class="actions">
+          <button class="ghost" id="prevBtn">Назад</button>
+          <button class="primary" id="nextBtn">Далее</button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="resultCard" aria-live="polite">
+        <h2>Результат</h2>
+        <p class="result-score" id="scoreText">0 из 20</p>
+        <p class="result-band" id="iqText">IQ: 100</p>
+        <p class="result-band" id="bandText">Средний уровень</p>
+        <p class="muted" id="detailText">
+          Это ориентационная оценка, не заменяющая профессиональное тестирование.
+          Для стандартизированной диагностики нужны лицензированные методики и
+          специалист.
+        </p>
+        <div class="result-grid" id="domainGrid"></div>
+        <div class="actions">
+          <button class="ghost" id="restartBtn">Пройти заново</button>
+        </div>
+      </section>
+
+      <section class="footnote">
+        <p>
+          Принципы: смешение доменов, одинаковый вес вопросов, ограниченное время,
+          без подсказок, единый формат. Это приближает опыт к международной структуре
+          тестов IQ, но не является официальной нормой.
+        </p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
