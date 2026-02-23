@@ -188,6 +188,31 @@ const toFormBody = (payload) =>
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join("&");
 
+const buildPrettyAnswers = (items) =>
+  items
+    .map((item, idx) => {
+      const chosen =
+        item.chosen === null || item.chosen === undefined
+          ? "Без ответа"
+          : item.options[item.chosen];
+      const correct =
+        item.correct === null || item.correct === undefined
+          ? "Без оценки"
+          : item.options[item.correct];
+      const verdict =
+        item.correct === null || item.correct === undefined
+          ? "Не оценивается"
+          : item.chosen === item.correct
+            ? "Верно"
+            : `Неверно (верный: ${correct})`;
+      return [
+        `${idx + 1}. [${item.domain}] ${item.text}`,
+        `Ответ: ${chosen}`,
+        `Итог: ${verdict}`,
+      ].join("\n");
+    })
+    .join("\n\n");
+
 const renderQuestion = () => {
   const q = questions[currentIndex];
   progressLabel.textContent = `Вопрос ${currentIndex + 1} из ${questions.length}`;
@@ -309,7 +334,8 @@ const finishTest = () => {
     total: run.total,
     iq_estimate: run.iq,
     band: bandByScore(score, total),
-    answers: JSON.stringify(run.items),
+    answers_pretty: buildPrettyAnswers(run.items),
+    answers_json: JSON.stringify(run.items),
   };
 
   fetch("/", {
