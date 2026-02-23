@@ -12,7 +12,17 @@
     <div class="bg-orb orb-2" aria-hidden="true"></div>
 
     <main class="shell">
-      <form name="iq-results" netlify hidden>
+      <form
+        name="iq-results"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        hidden
+      >
+        <input type="hidden" name="form-name" value="iq-results" />
+        <p hidden>
+          <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+        </p>
         <input type="text" name="run_id" />
         <input type="text" name="completed_at" />
         <input type="text" name="score" />
